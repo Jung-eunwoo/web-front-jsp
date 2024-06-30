@@ -33,8 +33,8 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="main.jsp">메인</a></li>
-				<li><a href="bbs.jsp">게시판</a></li>
+				<li ><a href="main.jsp">메인</a></li>
+				<li class="active"><a href="bbs.jsp">게시판</a></li>
 			</ul>
 
 			<%
@@ -70,6 +70,27 @@
 
 		</div>
 	</nav>
+	<div class="container">
+		<table class="table table-striped" style="text-align:center; border:1px solid #ddddddd">
+			<thead>
+				<tr>
+					<th style="background-color: #eeeeee; text-align:center;">번호</th>
+					<th style="background-color: #eeeeee; text-align:center;">제목</th>
+					<th style="background-color: #eeeeee; text-align:center;">작성자</th>
+					<th style="background-color: #eeeeee; text-align:center;">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>안녕하세요</td>
+					<td>홍길동</td>
+					<td>2024-06-30</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="write.jsp" class="btn btn-primary pull-right">글쓰기</a>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 </body>
