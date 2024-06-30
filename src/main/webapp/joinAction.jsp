@@ -31,6 +31,7 @@ request.setCharacterEncoding("UTF-8");
 			UserDAO userDAO = new UserDAO();
 			int result = userDAO.join(user);
 			if(result == 1){
+				session.setAttribute("userID",user.getUserID());
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("location.href = 'main.jsp'");
@@ -44,6 +45,7 @@ request.setCharacterEncoding("UTF-8");
 				script.println("</script>");
 			}
 			else{
+				session.setAttribute("userID",user.getUserID());
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("location.href = 'main.jsp'");
