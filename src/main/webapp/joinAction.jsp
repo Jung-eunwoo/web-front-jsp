@@ -21,38 +21,47 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<%
-		if(user.getUserID()==null||user.getUserPassword()==null||user.getUserName()==null||user.getUserGender()==null||user.getUserEmail()==null){
+	String userID = null;
+	if (session.getAttribute(userID) != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+	if (userID != null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('이미 로그인이 되어있습니다.')");
+		script.println("location.href = 'main.jsp'");
+		script.println("</script>");
+	}
+	if (user.getUserID() == null || user.getUserPassword() == null || user.getUserName() == null
+			|| user.getUserGender() == null || user.getUserEmail() == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('빈칸인 부분이 있습니다. 확인해주세요!')");
+		script.println("history.back()");
+		script.println("</script>");
+	} else {
+		UserDAO userDAO = new UserDAO();
+		int result = userDAO.join(user);
+		if (result == 1) {
+			session.setAttribute("userID", user.getUserID());
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('빈칸인 부분이 있습니다. 확인해주세요!')");
+			script.println("location.href = 'main.jsp'");
+			script.println("</script>");
+		} else if (result == -1) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 존재하는 아이디 입니다.')");
 			script.println("history.back()");
 			script.println("</script>");
-		}else{
-			UserDAO userDAO = new UserDAO();
-			int result = userDAO.join(user);
-			if(result == 1){
-				session.setAttribute("userID",user.getUserID());
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("location.href = 'main.jsp'");
-				script.println("</script>");
-			}
-			else if(result == -1){
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('이미 존재하는 아이디 입니다.')");
-				script.println("history.back()");
-				script.println("</script>");
-			}
-			else{
-				session.setAttribute("userID",user.getUserID());
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("location.href = 'main.jsp'");
-				script.println("</script>");
-			}
+		} else {
+			session.setAttribute("userID", user.getUserID());
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("location.href = 'main.jsp'");
+			script.println("</script>");
 		}
-		
+	}
 	%>
 </body>
 </html>
